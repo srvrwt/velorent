@@ -3,6 +3,8 @@ const sendEmail = require("../utils/sendEmail");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { OAuth2Client } = require("google-auth-library");
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 // ==========================
 // Register Controller
@@ -87,6 +89,64 @@ async function loginUser(req, res) {
     console.error(error);
 
     res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
+// ==========================
+// Google Login
+// ==========================
+async function googleLogin(req, res) {
+  try {
+    const { credential } = req.body;
+
+    if (!credential) {
+      return res.status(400).json({
+        message: "Google credential is required.",
+      });
+    }
+
+    // Verify Google Token
+    const ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    // Get Google User
+    const payload = ticket.getPayload();
+
+    const { sub, email, name, picture } = payload;
+
+    // Find user
+    let user = await User.findOne({ email });
+
+    // Create user if not found
+    if (!user) {
+      user = await User.create({
+        name,
+        email,
+        password: "",
+        provider: "google",
+        googleId: sub,
+        avatar: picture,
+      });
+    }
+
+    // Generate JWT
+    const token = generateToken(user._id);
+
+    // Return same response as normal login
+    return res.status(200).json({
+      message: "Google login successful.",
+      token,
+      user,
+    });
+
+  } catch (error) {
+    console.error("Google Login Error:", error);
+
+    return res.status(500).json({
       message: error.message,
     });
   }
@@ -200,9 +260,11 @@ async function resetPassword(req, res) {
   }
 }
 
+
 module.exports = {
   registerUser,
   loginUser,
   forgotPassword,
   resetPassword,
+    googleLogin,
 };

@@ -1,4 +1,5 @@
 import axios from "axios";
+import api from "./api";
 
 const API_URL = "http://localhost:5000/api/auth";
 
@@ -14,6 +15,10 @@ export async function loginUser(userData) {
   return response.data;
 }
 
+export async function googleLogin(data) {
+    const response = await api.post("/auth/google", data);
+    return response.data;no
+}
 // Forgot Password
 export async function forgotPassword(userData) {
   const response = await axios.post(

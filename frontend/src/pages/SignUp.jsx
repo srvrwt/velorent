@@ -1,19 +1,22 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import InputField from "../components/InputField";
 import FormButton from "../components/FormButton";
+import SocialLogin from "../components/SocialLogin";
+
 import Logo from "../assets/images/logo-velorent.webp";
-import googleIcon from "../assets/images/icon-google.webp";
-import Github from "../assets/images/github.svg";
+
 import { registerUser } from "../services/authService";
+import { googleLogin } from "../services/googleAuthService";
+import { saveAuth } from "../utils/auth";
+
 import Error from "../assets/icons/error.svg";
 import Success from "../assets/icons/checkmark.svg";
-import { saveAuth } from "../utils/auth";
 
 function SignUp() {
     const navigate = useNavigate();
 
-    // Form state
     const [formData, setFormData] = useState({
         name: "",
         email: "",
@@ -41,26 +44,22 @@ function SignUp() {
     function validateForm() {
         let newErrors = {};
 
-        // Name validation
         if (!formData.name.trim()) {
             newErrors.name = "Name is required";
         }
 
-        // Email validation
         if (!formData.email.trim()) {
             newErrors.email = "Email is required";
         } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
             newErrors.email = "Invalid email format";
         }
 
-        // Password validation
         if (!formData.password) {
             newErrors.password = "Password is required";
         } else if (formData.password.length < 6) {
             newErrors.password = "Password must be at least 6 characters";
         }
 
-        // Confirm Password validation
         if (!formData.confirmPassword) {
             newErrors.confirmPassword = "Please confirm your password";
         } else if (formData.password !== formData.confirmPassword) {
@@ -93,15 +92,12 @@ function SignUp() {
             setLoading(true);
 
             const data = await registerUser(formData);
+
             saveAuth(data);
-            navigate("/");
 
-            // Save token if your API returns one
-            if (data.token) {
-                localStorage.setItem("token", data.token);
-            }
-
-            setSuccessMessage(data.message || "Account created successfully!");
+            setSuccessMessage(
+                data.message || "Account created successfully!"
+            );
 
             setTimeout(() => {
                 navigate("/");
@@ -109,12 +105,31 @@ function SignUp() {
 
         } catch (error) {
             setServerError(
-                error.response?.data?.message || "Something went wrong. Please try again later."
+                error.response?.data?.message ||
+                "Something went wrong. Please try again later."
             );
         } finally {
             setLoading(false);
         }
     }
+
+  async function handleGoogleLogin(response) {
+  try {
+    const data = await googleLogin(response.credential);
+
+    // console.log(":", data);
+
+    saveAuth(data);
+
+    navigate("/");
+  } catch (error) {
+    console.log(error);
+
+    setServerError(
+      error.response?.data?.message || "Google login failed."
+    );
+  }
+}
 
     return (
         <div className="form_container">
@@ -128,7 +143,8 @@ function SignUp() {
 
             {successMessage && (
                 <div className="toast toast_success flex gap_xsm align_center justify_center">
-                    <img src={Success} alt="Success" />                    {successMessage}
+                    <img src={Success} alt="Success" />
+                    {successMessage}
                 </div>
             )}
 
@@ -143,13 +159,20 @@ function SignUp() {
                 </p>
 
                 <div className="form_header flex mt_sm">
-                    <Link to="/login">Login</Link>
-                    <Link className="active" to="/sign-up">
+                    <Link to="/login">
+                        Login
+                    </Link>
+
+                    <Link
+                        className="active"
+                        to="/sign-up"
+                    >
                         Sign Up
                     </Link>
                 </div>
 
                 <form onSubmit={handleSubmit}>
+
                     <InputField
                         label="Full Name"
                         type="text"
@@ -191,36 +214,29 @@ function SignUp() {
                     />
 
                     <FormButton
-                        text={loading ? "Creating..." : "Create Account"}
+                        text={
+                            loading
+                                ? "Creating..."
+                                : "Create Account"
+                        }
                         disabled={loading}
                     />
+
                 </form>
 
                 <div className="divider">
                     <span>Or continue with</span>
                 </div>
 
-                <div className="login_option flex gap_sm">
-                    <button
-                        type="button"
-                        className="with_google radius border bg_white"
-                    >
-                        <img src={googleIcon} alt="Google" />
-                        Google
-                    </button>
-
-                    <button
-                        type="button"
-                        className="with_google radius border bg_white"
-                    >
-                        <img src={Github} alt="Github" />
-                        Github
-                    </button>
-                </div>
+                <SocialLogin
+                    onGoogleSuccess={handleGoogleLogin}
+                />
 
                 <p className="form_small">
                     Having trouble?{" "}
-                    <Link to="#">Contact Support</Link>
+                    <Link to="#">
+                        Contact Support
+                    </Link>
                 </p>
 
             </div>

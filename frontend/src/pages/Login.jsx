@@ -8,6 +8,8 @@ import Logo from "../assets/images/logo-velorent.webp";
 import InputField from "../components/InputField";
 import FormButton from "../components/FormButton";
 import { saveAuth } from "../utils/auth";
+import SocialLogin from "../components/SocialLogin";
+import { googleLogin } from "../services/googleAuthService";
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -89,7 +91,19 @@ function Login() {
             setLoading(false);
         }
     }
+async function handleGoogleLogin(response) {
+  try {
+    const data = await googleLogin(response.credential);
 
+    // console.log("Google API Response:", data);
+
+    saveAuth(data);
+
+    navigate("/");
+  } catch (error) {
+    console.log(error);
+  }
+}
     return (
         <div className="form_container">
 
@@ -167,23 +181,9 @@ function Login() {
                     <span>Or continue with</span>
                 </div>
 
-                <div className="login_option flex gap_sm">
-                    <button
-                        type="button"
-                        className="with_google radius border bg_white"
-                    >
-                        <img src={googleIcon} alt="Google" />
-                        Google
-                    </button>
-
-                    <button
-                        type="button"
-                        className="with_google radius border bg_white"
-                    >
-                        <img src={Github} alt="Github" />
-                        Github
-                    </button>
-                </div>
+            <SocialLogin
+    onGoogleSuccess={handleGoogleLogin}
+/>
 
                 <p className="form_small">
                     Having trouble?{" "}

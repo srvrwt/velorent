@@ -3,14 +3,10 @@ import Logo from "../assets/images/logo-velorent.webp";
 import { getUser, logout } from "../utils/auth";
 
 function MainLayout() {
-      const user = getUser();
-  const navigate = useNavigate();
+    const user = getUser();
+    const navigate = useNavigate();
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
-
+    
     return (
         <>
             <header>
@@ -55,48 +51,43 @@ function MainLayout() {
                         About Us
                     </NavLink>
 
-
-
-                    <NavLink
-                        to="/dashboard"
-                        className={({ isActive }) => (isActive ? "active" : "")}
-                    >
-                        Dashboard
-                    </NavLink>
                 </nav>
 
                 <div className="flex gap_md align_center justify_end">
- {user ? (
-  <div className="user-info">
-    <div className="avatar">
-      {user.name.charAt(0).toUpperCase()}
-    </div>
+                    {user ? (
+                        <div className="user-info">
 
-    <span>{user.name.split(" ")[0]}</span>
 
-    <button onClick={handleLogout}>
-      Logout
-    </button>
-  </div>
-) : (
-  <>
-    <NavLink
-      to="/login"
-      className={({ isActive }) => (isActive ? "active" : "")}
-    >
-      Login
-    </NavLink>
+                            <NavLink className="flex gap_sm align_center justify_end"
+                                to="/dashboard">
+                                <span className="user-name">{user.name.split(" ")[0]}</span>
 
-    <NavLink
-      to="/sign-up"
-      className={({ isActive }) =>
-        `button ${isActive ? "active" : ""}`
-      }
-    >
-      Sign Up
-    </NavLink>
-  </>
-)}
+                                <div className="avatar flex align_center justify_center bg_green">
+                                    {user.name.charAt(0).toUpperCase()}
+                                </div>
+                            </NavLink>
+
+
+                        </div>
+                    ) : (
+                        <>
+                            <NavLink
+                                to="/login"
+                                className={({ isActive }) => (isActive ? "active" : "")}
+                            >
+                                Login
+                            </NavLink>
+
+                            <NavLink
+                                to="/sign-up"
+                                className={({ isActive }) =>
+                                    `button ${isActive ? "active" : ""}`
+                                }
+                            >
+                                Sign Up
+                            </NavLink>
+                        </>
+                    )}
                 </div>
             </header>
 
