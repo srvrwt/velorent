@@ -132,7 +132,7 @@ function AdminLayout() {
 
 
       {/* Main Content */}
-      <main className="admin-content pd_lg">
+      <main className="admin-content pd_lg width_full">
         <Outlet />
       </main>
 

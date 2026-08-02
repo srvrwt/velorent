@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getUser, logout } from "../utils/auth";
+import AddBikeModal from "../components/AddBikeModal";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -11,7 +12,8 @@ function Dashboard() {
     email: user?.email || "",
   });
 
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
+  const [showPasswordModal, setShowPasswordModal] =
+    useState(false);
 
   const [passwordData, setPasswordData] = useState({
     currentPassword: "",
@@ -19,10 +21,18 @@ function Dashboard() {
     confirmPassword: "",
   });
 
+  // Add Bike Modal
+  const [showAddBikeModal, setShowAddBikeModal] =
+    useState(false);
+
+  const [myBikes, setMyBikes] = useState([]);
+
+
   function handleLogout() {
     logout();
     navigate("/login");
   }
+
 
   function handleProfileChange(e) {
     setProfile({
@@ -31,12 +41,14 @@ function Dashboard() {
     });
   }
 
+
   function handlePasswordChange(e) {
     setPasswordData({
       ...passwordData,
       [e.target.name]: e.target.value,
     });
   }
+
 
   function handleProfileSubmit(e) {
     e.preventDefault();
@@ -47,16 +59,23 @@ function Dashboard() {
     alert("Profile Updated");
   }
 
+
   function handlePasswordSubmit(e) {
     e.preventDefault();
 
-    if (passwordData.newPassword !== passwordData.confirmPassword) {
+    if (
+      passwordData.newPassword !==
+      passwordData.confirmPassword
+    ) {
       alert("Passwords do not match");
       return;
     }
 
     // TODO:
-    // axios.put("/api/users/change-password", passwordData)
+    // axios.put(
+    //   "/api/users/change-password",
+    //   passwordData
+    // )
 
     alert("Password Updated");
 
@@ -69,19 +88,30 @@ function Dashboard() {
     });
   }
 
+
   if (!user) {
     return (
       <div className="page_container dashboard_login">
-        <h1>Dashboard</h1>
 
-        <p>Please login to continue.</p>
+        <h1>
+          Dashboard
+        </h1>
 
-        <Link className="button" to="/login">
+        <p>
+          Please login to continue.
+        </p>
+
+        <Link
+          className="button"
+          to="/login"
+        >
           Login
         </Link>
+
       </div>
     );
   }
+
 
   return (
     <>
@@ -89,24 +119,40 @@ function Dashboard() {
 
         <div className="dashboard_grid">
 
-          {/* LEFT CARD */}
+          {/* =========================
+              LEFT CARD
+          ========================== */}
 
           <div className="ride_card">
 
-            <small>CURRENT SESSION</small>
+            <small>
+              CURRENT SESSION
+            </small>
 
-            <h2>Volt-Z Motorcycle</h2>
+            <h2>
+              Volt-Z Motorcycle
+            </h2>
 
             <div className="ride_stats">
 
               <div>
-                <span>Time Remaining</span>
-                <h3>42:15</h3>
+                <span>
+                  Time Remaining
+                </span>
+
+                <h3>
+                  42:15
+                </h3>
               </div>
 
               <div>
-                <span>Distance</span>
-                <h3>12.4 km</h3>
+                <span>
+                  Distance
+                </span>
+
+                <h3>
+                  12.4 km
+                </h3>
               </div>
 
             </div>
@@ -125,60 +171,116 @@ function Dashboard() {
 
           </div>
 
-          {/* PROFILE */}
+
+          {/* =========================
+              LIST YOUR BIKE BUTTON
+          ========================== */}
+
+      <button
+  type="button"
+  className="button"
+  onClick={() => {
+    console.log("List Your Bike clicked");
+    setShowAddBikeModal(true);
+  }}
+>
+  + List Your Bike S
+</button>
+
+
+          {/* =========================
+              PROFILE
+          ========================== */}
 
           <div className="profile_card">
 
-            <h2>Profile & Security</h2>
+            <h2>
+              Profile & Security
+            </h2>
 
             <div className="profile_header">
 
               <div className="avatar">
-                {user.name.charAt(0).toUpperCase()}
+
+                {user.name
+                  .charAt(0)
+                  .toUpperCase()}
+
               </div>
 
               <div>
 
-                <h3>{user.name}</h3>
+                <h3>
+                  {user.name}
+                </h3>
 
-                <p>{user.email}</p>
+                <p>
+                  {user.email}
+                </p>
 
               </div>
 
             </div>
 
-            <form onSubmit={handleProfileSubmit}>
 
-              <label>Full Name</label>
+            {/* Profile Form */}
+
+            <form
+              onSubmit={
+                handleProfileSubmit
+              }
+            >
+
+              <label>
+                Full Name
+              </label>
 
               <input
                 type="text"
                 name="name"
                 value={profile.name}
-                onChange={handleProfileChange}
+                onChange={
+                  handleProfileChange
+                }
               />
 
-              <label>Email</label>
+
+              <label>
+                Email
+              </label>
 
               <input
                 type="email"
                 name="email"
                 value={profile.email}
-                onChange={handleProfileChange}
+                onChange={
+                  handleProfileChange
+                }
               />
 
-              <button className="update_btn">
+
+              <button
+                className="update_btn"
+              >
                 Update Profile
               </button>
 
             </form>
 
+
+            {/* Change Password */}
+
             <button
               className="change_password"
-              onClick={() => setShowPasswordModal(true)}
+              onClick={() =>
+                setShowPasswordModal(true)
+              }
             >
               Change Password →
             </button>
+
+
+            {/* Logout */}
 
             <button
               className="logout_btn"
@@ -191,13 +293,18 @@ function Dashboard() {
 
         </div>
 
-        {/* BOOKINGS */}
+
+        {/* =========================
+            BOOKINGS
+        ========================== */}
 
         <div className="booking_card">
 
           <div className="booking_header">
 
-            <h2>Recent Bookings</h2>
+            <h2>
+              Recent Bookings
+            </h2>
 
             <Link to="/">
               View All
@@ -205,31 +312,45 @@ function Dashboard() {
 
           </div>
 
+
           <div className="booking_item">
 
             <div>
 
-              <strong>Volt-Z #392</strong>
+              <strong>
+                Volt-Z #392
+              </strong>
 
-              <p>May 14, 2026</p>
+              <p>
+                May 14, 2026
+              </p>
 
             </div>
 
-            <strong>$14.20</strong>
+            <strong>
+              $14.20
+            </strong>
 
           </div>
 
+
           <div className="booking_item">
 
             <div>
 
-              <strong>UrbanGlide</strong>
+              <strong>
+                UrbanGlide
+              </strong>
 
-              <p>May 11, 2026</p>
+              <p>
+                May 11, 2026
+              </p>
 
             </div>
 
-            <strong>$5.50</strong>
+            <strong>
+              $5.50
+            </strong>
 
           </div>
 
@@ -237,7 +358,10 @@ function Dashboard() {
 
       </section>
 
-      {/* PASSWORD MODAL */}
+
+      {/* =========================
+          PASSWORD MODAL
+      ========================== */}
 
       {showPasswordModal && (
 
@@ -245,39 +369,62 @@ function Dashboard() {
 
           <div className="password_modal">
 
-            <h2>Change Password</h2>
+            <h2>
+              Change Password
+            </h2>
 
-            <form onSubmit={handlePasswordSubmit}>
+            <form
+              onSubmit={
+                handlePasswordSubmit
+              }
+            >
 
               <input
                 type="password"
                 placeholder="Current Password"
                 name="currentPassword"
-                value={passwordData.currentPassword}
-                onChange={handlePasswordChange}
+                value={
+                  passwordData.currentPassword
+                }
+                onChange={
+                  handlePasswordChange
+                }
               />
+
 
               <input
                 type="password"
                 placeholder="New Password"
                 name="newPassword"
-                value={passwordData.newPassword}
-                onChange={handlePasswordChange}
+                value={
+                  passwordData.newPassword
+                }
+                onChange={
+                  handlePasswordChange
+                }
               />
+
 
               <input
                 type="password"
                 placeholder="Confirm Password"
                 name="confirmPassword"
-                value={passwordData.confirmPassword}
-                onChange={handlePasswordChange}
+                value={
+                  passwordData.confirmPassword
+                }
+                onChange={
+                  handlePasswordChange
+                }
               />
+
 
               <div className="modal_buttons">
 
                 <button
                   type="button"
-                  onClick={() => setShowPasswordModal(false)}
+                  onClick={() =>
+                    setShowPasswordModal(false)
+                  }
                 >
                   Cancel
                 </button>
@@ -293,6 +440,35 @@ function Dashboard() {
           </div>
 
         </div>
+
+      )}
+
+
+      {/* =========================
+          ADD BIKE MODAL
+      ========================== */}
+
+      {showAddBikeModal && (
+
+        <AddBikeModal
+          onClose={() =>
+            setShowAddBikeModal(false)
+          }
+
+          onSuccess={(newBike) => {
+
+            setMyBikes((prev) => [
+              newBike,
+              ...prev,
+            ]);
+
+            // Optional success message
+            alert(
+              "Bike submitted successfully for admin approval!"
+            );
+
+          }}
+        />
 
       )}
 

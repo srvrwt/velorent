@@ -1,5 +1,9 @@
 import { Routes, Route } from "react-router-dom";
 
+import { useEffect } from "react";
+import { getCurrentUser } from "./services/authService";
+import { saveAuth } from "./utils/auth";
+
 import MainLayout from "./layouts/MainLayout";
 
 import Home from "./pages/Home";
@@ -24,6 +28,37 @@ import Bookings from "./pages/admin/Bookings";
 import Payments from "./pages/admin/Payments";
 
 function App() {
+
+  useEffect(() => {
+
+  async function loadUser() {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    try {
+
+      const user = await getCurrentUser();
+
+      saveAuth({
+        token,
+        user,
+      });
+
+    } catch (error) {
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+
+    }
+
+  }
+
+  loadUser();
+
+}, []);
+
   return (
     <Routes>
       {/* Routes with MainLayout */}

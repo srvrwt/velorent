@@ -2,8 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
 import Error from "../assets/icons/error.svg";
-import googleIcon from "../assets/images/icon-google.webp";
-import Github from "../assets/images/github.svg";
 import Logo from "../assets/images/logo-velorent.webp";
 import InputField from "../components/InputField";
 import FormButton from "../components/FormButton";

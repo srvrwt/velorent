@@ -260,11 +260,25 @@ async function resetPassword(req, res) {
   }
 }
 
+// ==========================
+// Get Current User
+// ==========================
+async function getMe(req, res) {
+  try {
+    res.json(req.user);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
 
 module.exports = {
   registerUser,
   loginUser,
+  googleLogin,
   forgotPassword,
   resetPassword,
-    googleLogin,
+  getMe,
 };

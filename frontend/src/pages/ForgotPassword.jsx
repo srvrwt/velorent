@@ -26,7 +26,7 @@ function ForgotPassword() {
         const timer = setTimeout(() => {
             setServerError("");
             setSuccessMessage("");
-        }, 3000);
+        }, 300000000000000);
 
         return () => clearTimeout(timer);
     }, [serverError, successMessage]);

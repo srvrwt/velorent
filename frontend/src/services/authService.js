@@ -15,6 +15,7 @@ export async function loginUser(userData) {
   return response.data;
 }
 
+// Google login
 export async function googleLogin(data) {
     const response = await api.post("/auth/google", data);
     return response.data;no
@@ -27,6 +28,11 @@ export async function forgotPassword(userData) {
   );
 
   return response.data;
+}
+
+export async function getCurrentUser() {
+  const { data } = await api.get("/auth/me");
+  return data;
 }
 
 export async function resetPassword(userData) {

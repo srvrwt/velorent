@@ -8,7 +8,18 @@ const {
   forgotPassword,
   resetPassword,
   googleLogin,
+    getMe,
 } = require("../controllers/authController");
+const {
+  protect,
+} = require("../middleware/authMiddleware");
+
+
+router.get(
+  "/me",
+  protect,
+  getMe
+);
 
 // Register Route
 router.post("/register", registerUser);
