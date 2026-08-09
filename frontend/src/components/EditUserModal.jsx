@@ -32,7 +32,7 @@ function EditUserModal({
     return (
         <div className="form_container modal-overlay pd_fixed">
 
-            <div className="form_wrap modal">
+            <div className="form_wrap modal radius">
 
                 <div className="modal-header flex gap_sm align_center space_between">
                     <h3 className="color_green font_large">Edit User</h3>

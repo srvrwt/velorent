@@ -6,9 +6,9 @@ const bcrypt = require("bcrypt");
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-// ==========================
+// ====
 // Register Controller
-// ==========================
+// ====
 async function registerUser(req, res) {
   try {
     const { name, email, password } = req.body;
@@ -51,9 +51,9 @@ async function registerUser(req, res) {
   }
 }
 
-// ==========================
+// ====
 // Login Controller
-// ==========================
+// ====
 async function loginUser(req, res) {
   try {
     const { email, password } = req.body;
@@ -94,9 +94,9 @@ async function loginUser(req, res) {
   }
 }
 
-// ==========================
+// ====
 // Google Login
-// ==========================
+// ====
 async function googleLogin(req, res) {
   try {
     const { credential } = req.body;
@@ -152,9 +152,9 @@ async function googleLogin(req, res) {
   }
 }
 
-// ==========================
+// ====
 // Forgot Password
-// ==========================
+// ====
 async function forgotPassword(req, res) {
   try {
     const { email } = req.body;
@@ -215,9 +215,9 @@ async function forgotPassword(req, res) {
   }
 }
 
-// ==========================
+// ====
 // Reset Password
-// ==========================
+// ====
 async function resetPassword(req, res) {
   try {
     const { token, password } = req.body;
@@ -260,9 +260,9 @@ async function resetPassword(req, res) {
   }
 }
 
-// ==========================
+// ====
 // Get Current User
-// ==========================
+// ====
 async function getMe(req, res) {
   try {
     res.json(req.user);

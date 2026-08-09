@@ -119,9 +119,9 @@ function Dashboard() {
 
         <div className="dashboard_grid">
 
-          {/* =========================
+          {/* ===
               LEFT CARD
-          ========================== */}
+          ==== */}
 
           <div className="ride_card">
 
@@ -172,9 +172,9 @@ function Dashboard() {
           </div>
 
 
-          {/* =========================
+          {/* ===
               LIST YOUR BIKE BUTTON
-          ========================== */}
+          ==== */}
 
       <button
   type="button"
@@ -188,9 +188,9 @@ function Dashboard() {
 </button>
 
 
-          {/* =========================
+          {/* ===
               PROFILE
-          ========================== */}
+          ==== */}
 
           <div className="profile_card">
 
@@ -294,9 +294,9 @@ function Dashboard() {
         </div>
 
 
-        {/* =========================
+        {/* ===
             BOOKINGS
-        ========================== */}
+        ==== */}
 
         <div className="booking_card">
 
@@ -359,9 +359,9 @@ function Dashboard() {
       </section>
 
 
-      {/* =========================
+      {/* ===
           PASSWORD MODAL
-      ========================== */}
+      ==== */}
 
       {showPasswordModal && (
 
@@ -444,9 +444,9 @@ function Dashboard() {
       )}
 
 
-      {/* =========================
+      {/* ===
           ADD BIKE MODAL
-      ========================== */}
+      ==== */}
 
       {showAddBikeModal && (
 

@@ -1,9 +1,9 @@
 const Bike = require("../models/Bike");
 
 
-// ==========================================
+
 // USER: ADD BIKE
-// ==========================================
+
 
 const addBike = async (
   req,
@@ -11,7 +11,8 @@ const addBike = async (
 ) => {
 
   try {
-
+ console.log("=== REQ.BODY ===", req.body);
+    console.log("=== REQ.FILES ===", req.files);
     const {
 
       bikeName,
@@ -24,7 +25,6 @@ const addBike = async (
 
       addressLine,
       city,
-      district,
       state,
       pincode,
 
@@ -37,9 +37,9 @@ const addBike = async (
     } = req.body;
 
 
-    // ==========================================
+    
     // CHECK FILES
-    // ==========================================
+    
 
     if (
       !req.files?.frontImage ||
@@ -73,9 +73,9 @@ const addBike = async (
     }
 
 
-    // ==========================================
+    
     // CHECK REQUIRED FIELDS
-    // ==========================================
+    
 
     if (
       !bikeName ||
@@ -86,7 +86,6 @@ const addBike = async (
       !registrationNumber ||
       !addressLine ||
       !city ||
-      !district ||
       !state ||
       !pincode ||
       !mobileNumber
@@ -102,9 +101,9 @@ const addBike = async (
     }
 
 
-    // ==========================================
+    
     // CHECK REGISTRATION
-    // ==========================================
+    
 
     const existingBike =
       await Bike.findOne({
@@ -127,9 +126,9 @@ const addBike = async (
     }
 
 
-    // ==========================================
+    
     // FILE URLS
-    // ==========================================
+    
 
     const frontImage =
       `/uploads/bikes/${req.files.frontImage[0].filename}`;
@@ -151,9 +150,9 @@ const addBike = async (
       `/uploads/documents/${req.files.idProof[0].filename}`;
 
 
-    // ==========================================
+    
     // CREATE BIKE
-    // ==========================================
+    
 
     const bike =
       await Bike.create({
@@ -201,9 +200,6 @@ const addBike = async (
           addressLine,
 
           city,
-
-          district,
-
           state,
 
           pincode,
@@ -239,9 +235,9 @@ const addBike = async (
       });
 
 
-    // ==========================================
+    
     // RESPONSE
-    // ==========================================
+    
 
     res.status(201).json({
 
@@ -273,9 +269,9 @@ const addBike = async (
 };
 
 
-// ==========================================
+
 // USER: MY BIKES
-// ==========================================
+
 
 const getMyBikes = async (
   req,
@@ -322,9 +318,9 @@ const getMyBikes = async (
 
 };
 
-// =====================================================
+
 // ADMIN: GET ALL BIKES
-// =====================================================
+
 
 const getAllBikes = async (req, res) => {
   try {
@@ -349,9 +345,9 @@ const getAllBikes = async (req, res) => {
 };
 
 
-// ==========================================
+
 // PUBLIC: APPROVED BIKES
-// ==========================================
+
 
 const getApprovedBikes = async (
   req,
@@ -404,9 +400,9 @@ const getApprovedBikes = async (
 };
 
 
-// ==========================================
+
 // PUBLIC: SINGLE BIKE
-// ==========================================
+
 
 const getBikeById = async (
   req,
@@ -476,9 +472,9 @@ const getBikeById = async (
 
 };
 
-// =====================================================
+
 // ADMIN: APPROVE BIKE
-// =====================================================
+
 
 const approveBike = async (req, res) => {
   try {
@@ -519,9 +515,9 @@ const approveBike = async (req, res) => {
   }
 };
 
-// =====================================================
+
 // ADMIN: REJECT BIKE
-// =====================================================
+
 
 const rejectBike = async (req, res) => {
   try {
@@ -568,9 +564,9 @@ const rejectBike = async (req, res) => {
   }
 };
 
-// =====================================================
+
 // EXPORT
-// =====================================================
+
 
 module.exports = {
 

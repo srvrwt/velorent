@@ -22,9 +22,9 @@ app.use(express.json());
 app.use(loggerMiddleware);
 
 
-// ==========================================
+
 // SERVE UPLOADED FILES
-// ==========================================
+
 
 app.use(
   "/uploads",
@@ -34,9 +34,9 @@ app.use(
 );
 
 
-// ==========================================
+
 // ROUTES
-// ==========================================
+
 
 app.get("/", (req, res) => {
   res.send("Backend Server is Running 🚀");

@@ -1,9 +1,9 @@
 const User = require("../models/User");
 const Bike = require("../models/Bike");
 
-// ==========================
+// ====
 // Get All Users
-// ==========================
+// ====
 async function getAllUsers(req, res) {
   try {
     const users = await User.find()
@@ -20,9 +20,9 @@ async function getAllUsers(req, res) {
 }
 
 
-// ==========================
+// ====
 // Create User
-// ==========================
+// ====
 async function createUser(req, res) {
   try {
     const {
@@ -73,9 +73,9 @@ async function createUser(req, res) {
 }
 
 
-// ==========================
+// ====
 // Update User
-// ==========================
+// ====
 async function updateUser(req, res) {
   try {
     const { id } = req.params;
@@ -110,9 +110,9 @@ async function updateUser(req, res) {
 }
 
 
-// ==========================
+// ====
 // Delete User
-// ==========================
+// ====
 async function deleteUser(req, res) {
   try {
     const { id } = req.params;
@@ -138,9 +138,9 @@ async function deleteUser(req, res) {
   }
 }
 
-// =====================================================
+
 // ADMIN: ADD BIKE
-// =====================================================
+
 
 const adminAddBike = async (
   req,
@@ -247,9 +247,9 @@ const adminAddBike = async (
 };
 
 
-// =====================================================
+
 // ADMIN: GET ALL BIKES
-// =====================================================
+
 
 const getAllBikes = async (
   req,
@@ -285,9 +285,9 @@ const getAllBikes = async (
 };
 
 
-// =====================================================
+
 // ADMIN: APPROVE BIKE
-// =====================================================
+
 
 const approveBike = async (
   req,
@@ -334,9 +334,9 @@ const approveBike = async (
 };
 
 
-// =====================================================
+
 // ADMIN: REJECT BIKE
-// =====================================================
+
 
 const rejectBike = async (
   req,

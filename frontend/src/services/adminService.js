@@ -1,9 +1,9 @@
 import api from "./api";
 
 
-// ==========================================
+
 // USER MANAGEMENT
-// ==========================================
+
 
 export async function getAllUsers() {
   const { data } = await api.get(
@@ -51,9 +51,9 @@ export async function deleteUser(
 
 
 
-// ==========================================
+
 // BIKE MANAGEMENT
-// ==========================================
+
 
 // Get all bikes
 export async function getAllBikes() {

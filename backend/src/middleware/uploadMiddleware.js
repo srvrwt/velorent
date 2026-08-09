@@ -3,9 +3,9 @@ const path = require("path");
 const fs = require("fs");
 
 
-// ==========================================
+
 // CREATE UPLOAD DIRECTORIES
-// ==========================================
+
 
 const bikeUploadPath = path.join(
   __dirname,
@@ -38,9 +38,9 @@ if (!fs.existsSync(documentUploadPath)) {
 }
 
 
-// ==========================================
+
 // STORAGE
-// ==========================================
+
 
 const storage =
   multer.diskStorage({
@@ -107,9 +107,9 @@ const storage =
   });
 
 
-// ==========================================
+
 // FILE FILTER
-// ==========================================
+
 
 const fileFilter = (
   req,
@@ -191,9 +191,9 @@ const fileFilter = (
 };
 
 
-// ==========================================
+
 // MULTER
-// ==========================================
+
 
 const upload =
   multer({

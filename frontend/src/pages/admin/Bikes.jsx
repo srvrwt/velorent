@@ -225,6 +225,25 @@ function Bikes() {
 
   };
 
+  // ==========================================
+  // STATS FOR OVERVIEW CARDS
+  // ==========================================
+
+  const totalBikes = bikes.length;
+
+  const pendingCount = bikes.filter(
+    (bike) => bike.status === "pending"
+  ).length;
+
+  const approvedCount = bikes.filter(
+    (bike) => bike.status === "approved"
+  ).length;
+
+  const rejectedCount = bikes.filter(
+    (bike) => bike.status === "rejected"
+  ).length;
+
+
 
   // ==========================================
   // SEARCH + STATUS FILTER
@@ -367,6 +386,43 @@ function Bikes() {
 
       </div>
 
+      {/* OVERVIEW CARDS */}
+
+      <div className="stats-cards flex gap_sm mt_lg">
+
+        <div className="stat_card pd_fixed radius_regular flex_1 bg_white">
+          <div className="flex gap_xsm align_center space_between">
+            <svg  className="icon_small bg_green" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M200-80q-83 0-141.5-58.5T0-280q0-83 58.5-141.5T200-480q83 0 141.5 58.5T400-280q0 83-58.5 141.5T200-80Zm85-115q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35Zm155-5v-200L312-512q-12-11-18-25.5t-6-30.5q0-16 6.5-30.5T312-624l112-112q12-12 27.5-18t32.5-6q17 0 32.5 6t27.5 18l76 76q28 28 64 44t76 16v80q-57 0-108.5-22T560-604l-32-32-96 96 88 92v248h-80Zm123.5-563.5Q540-787 540-820t23.5-56.5Q587-900 620-900t56.5 23.5Q700-853 700-820t-23.5 56.5Q653-740 620-740t-56.5-23.5ZM760-80q-83 0-141.5-58.5T560-280q0-83 58.5-141.5T760-480q83 0 141.5 58.5T960-280q0 83-58.5 141.5T760-80Zm85-115q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35Z"></path></svg>
+            <h2>{totalBikes}</h2>
+          </div>
+          <p className="font_xsmall color_light mt_xsm">Total Bikes</p>
+
+        </div>
+
+
+        <div className="stat_card pd_fixed radius_regular flex_1 bg_white">
+          <div className="flex gap_xsm align_center space_between">
+   <svg  className="icon_small bg_approved" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M200-80q-83 0-141.5-58.5T0-280q0-83 58.5-141.5T200-480q83 0 141.5 58.5T400-280q0 83-58.5 141.5T200-80Zm85-115q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35Zm155-5v-200L312-512q-12-11-18-25.5t-6-30.5q0-16 6.5-30.5T312-624l112-112q12-12 27.5-18t32.5-6q17 0 32.5 6t27.5 18l76 76q28 28 64 44t76 16v80q-57 0-108.5-22T560-604l-32-32-96 96 88 92v248h-80Zm123.5-563.5Q540-787 540-820t23.5-56.5Q587-900 620-900t56.5 23.5Q700-853 700-820t-23.5 56.5Q653-740 620-740t-56.5-23.5ZM760-80q-83 0-141.5-58.5T560-280q0-83 58.5-141.5T760-480q83 0 141.5 58.5T960-280q0 83-58.5 141.5T760-80Zm85-115q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35Z"></path></svg>            <h2>{approvedCount}</h2>
+          </div>
+          <p className="font_xsmall color_light mt_xsm">Approved</p>
+        </div>
+        
+        <div className="stat_card pd_fixed radius_regular flex_1 bg_white">
+          <div className="flex gap_xsm align_center space_between">
+   <svg  className="icon_small bg_pending" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M200-80q-83 0-141.5-58.5T0-280q0-83 58.5-141.5T200-480q83 0 141.5 58.5T400-280q0 83-58.5 141.5T200-80Zm85-115q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35Zm155-5v-200L312-512q-12-11-18-25.5t-6-30.5q0-16 6.5-30.5T312-624l112-112q12-12 27.5-18t32.5-6q17 0 32.5 6t27.5 18l76 76q28 28 64 44t76 16v80q-57 0-108.5-22T560-604l-32-32-96 96 88 92v248h-80Zm123.5-563.5Q540-787 540-820t23.5-56.5Q587-900 620-900t56.5 23.5Q700-853 700-820t-23.5 56.5Q653-740 620-740t-56.5-23.5ZM760-80q-83 0-141.5-58.5T560-280q0-83 58.5-141.5T760-480q83 0 141.5 58.5T960-280q0 83-58.5 141.5T760-80Zm85-115q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35Z"></path></svg>          <h2>{pendingCount}</h2>
+
+          </div>
+          <p className="font_xsmall color_light mt_xsm">Pending</p>
+        </div>
+
+        <div className="stat_card pd_fixed radius_regular flex_1 bg_white">
+          <div className="flex gap_xsm align_center space_between">
+   <svg  className="icon_small bg_rejected" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="M200-80q-83 0-141.5-58.5T0-280q0-83 58.5-141.5T200-480q83 0 141.5 58.5T400-280q0 83-58.5 141.5T200-80Zm85-115q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35Zm155-5v-200L312-512q-12-11-18-25.5t-6-30.5q0-16 6.5-30.5T312-624l112-112q12-12 27.5-18t32.5-6q17 0 32.5 6t27.5 18l76 76q28 28 64 44t76 16v80q-57 0-108.5-22T560-604l-32-32-96 96 88 92v248h-80Zm123.5-563.5Q540-787 540-820t23.5-56.5Q587-900 620-900t56.5 23.5Q700-853 700-820t-23.5 56.5Q653-740 620-740t-56.5-23.5ZM760-80q-83 0-141.5-58.5T560-280q0-83 58.5-141.5T760-480q83 0 141.5 58.5T960-280q0 83-58.5 141.5T760-80Zm85-115q35-35 35-85t-35-85q-35-35-85-35t-85 35q-35 35-35 85t35 85q35 35 85 35t85-35Z"></path></svg>            <h2>{rejectedCount}</h2>
+          </div>
+          <p className="font_xsmall color_light mt_xsm">Rejected</p>
+        </div>
+
+      </div>
 
       {/* FILTERS */}
 
@@ -450,7 +506,7 @@ function Bikes() {
                 #
               </th>
 
-              <th>
+              <th width="140">
                 Bike
               </th>
 
@@ -557,7 +613,7 @@ function Bikes() {
 
                     <td>
 
-                      {bike.address?.district}, {bike.address?.state}
+                      {bike.address?.city}, {bike.address?.state}
 
                     </td>
 
@@ -582,7 +638,7 @@ function Bikes() {
 
                       <span
                         className={
-                          `role-badge ${bike.status}`
+                          `badge ${bike.status}`
                         }
                       >
 
@@ -600,7 +656,7 @@ function Bikes() {
                     <td>
 
                       <button
-                        className="button"
+                        className="button bg_white color_green hover_green"
                         onClick={() =>
                           handleViewBike(bike)
                         }

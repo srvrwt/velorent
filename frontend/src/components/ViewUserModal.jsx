@@ -3,7 +3,7 @@ function ViewUserModal({ user, onClose }) {
 
   return (
     <div className="modal-overlay">
-      <div className="modal">
+      <div className="modal radius">
 
         <div className="modal-header flex gap_sm align_center space_between">
           <h3 className="color_green font_large">User Details</h3>

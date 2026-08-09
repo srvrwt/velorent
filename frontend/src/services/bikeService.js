@@ -22,9 +22,9 @@ export const getMyBikes = async () => {
   return response.data;
 };
 
-// ==========================================
+
 // BIKE MANAGEMENT
-// ==========================================
+
 
 // Get all bikes
 export const getAllBikes = async () => {

@@ -12,17 +12,17 @@ function AdminBikeDetailsModal({
     return null;
   }
 
-  // ==========================================
+
   // BACKEND URL
-  // ==========================================
+
 
   const API_URL = "http://localhost:5000";
 
 
-  // ==========================================
+
   // HELPER
   // Convert backend relative URL to full URL
-  // ==========================================
+
 
   const getFileUrl = (filePath) => {
     if (!filePath) {
@@ -42,7 +42,7 @@ function AdminBikeDetailsModal({
   };
 
 
-  // ==========================================
+
   // BIKE IMAGES
   // Backend:
   //
@@ -52,7 +52,7 @@ function AdminBikeDetailsModal({
   //   left: "/uploads/bikes/left.webp",
   //   right: "/uploads/bikes/right.webp"
   // }
-  // ==========================================
+
 
   const imageList = [
     {
@@ -86,16 +86,16 @@ function AdminBikeDetailsModal({
     images.length > 0
       ? images
       : [
-          {
-            label: "Bike",
-            url: "/placeholder-bike.jpg",
-          },
-        ];
+        {
+          label: "Bike",
+          url: "/placeholder-bike.jpg",
+        },
+      ];
 
 
-  // ==========================================
+
   // IMAGE SLIDER
-  // ==========================================
+
 
   const showPrev = () => {
     setActiveImage((prev) =>
@@ -115,7 +115,7 @@ function AdminBikeDetailsModal({
   };
 
 
-  // ==========================================
+
   // DOCUMENTS
   //
   // Backend:
@@ -124,7 +124,7 @@ function AdminBikeDetailsModal({
   //   rc: "/uploads/documents/rc.jpg",
   //   idProof: "/uploads/documents/id-proof.jpg"
   // }
-  // ==========================================
+
 
   const documents = [
     bike.documents?.rc && {
@@ -139,9 +139,9 @@ function AdminBikeDetailsModal({
   ].filter(Boolean);
 
 
-  // ==========================================
+
   // CHECK IF DOCUMENT IS IMAGE
-  // ==========================================
+
 
   const isImageDocument = (filePath) => {
     return /\.(jpg|jpeg|png|webp)$/i.test(
@@ -150,408 +150,439 @@ function AdminBikeDetailsModal({
   };
 
 
-  // ==========================================
+
   // RENDER
-  // ==========================================
+
 
   return (
     <div
       className="modal-overlay"
       onClick={onClose}
     >
-      <div
-        className="modal-content modal modal-large"
-        onClick={(e) =>
-          e.stopPropagation()
-        }
-      >
+      <div className="modal_wrap radius">
+        <div
+          className="modal-content modal modal-large"
+          onClick={(e) =>
+            e.stopPropagation()
+          }
+        >
 
-        {/* ================================== */}
-        {/* MAIN BODY */}
-        {/* ================================== */}
+          {/* = */}
+          {/* MAIN BODY */}
+          {/* = */}
 
-        <div className="bike-modal-body flex gap_md">
-
-
-          {/* ================================== */}
-          {/* LEFT: BIKE IMAGES */}
-          {/* ================================== */}
-
-          <div className="bike-modal-images flex_1">
-
-            <div className="image-slider">
-
-              {/* MAIN IMAGE */}
-
-              <img
-                src={
-                  finalImages[activeImage].url
-                }
-                alt={
-                  `${bike.bikeName || "Bike"} - ${
-                    finalImages[activeImage].label
-                  }`
-                }
-                className="image-slider-main"
-                onError={(e) => {
-                  e.currentTarget.src =
-                    "/placeholder-bike.jpg";
-                }}
-              />
+          <div className="bike-modal-body flex gap_md">
 
 
-              {/* PREVIOUS BUTTON */}
+            {/* = */}
+            {/* LEFT: BIKE IMAGES */}
+            {/* = */}
 
-              {finalImages.length > 1 && (
-                <>
-                  <button
-                    type="button"
-                    className="slider-arrow slider-arrow-left"
-                    onClick={showPrev}
-                    aria-label="Previous image"
-                  >
-                    &#8249;
-                  </button>
+            <div className="bike-modal-images flex_1">
 
+              <div className="image-slider">
 
-                  {/* NEXT BUTTON */}
+                {/* MAIN IMAGE */}
 
-                  <button
-                    type="button"
-                    className="slider-arrow slider-arrow-right"
-                    onClick={showNext}
-                    aria-label="Next image"
-                  >
-                    &#8250;
-                  </button>
-
-
-                  {/* COUNTER */}
-
-                  <div className="slider-counter">
-                    {activeImage + 1} /{" "}
-                    {finalImages.length}
-                  </div>
-                </>
-              )}
-
-            </div>
+                <img
+                  src={
+                    finalImages[activeImage].url
+                  }
+                  alt={
+                    `${bike.bikeName || "Bike"} - ${finalImages[activeImage].label
+                    }`
+                  }
+                  className="image-slider-main"
+                  onError={(e) => {
+                    e.currentTarget.src =
+                      "/placeholder-bike.jpg";
+                  }}
+                />
 
 
-            {/* ================================== */}
-            {/* IMAGE THUMBNAILS */}
-            {/* ================================== */}
+                {/* PREVIOUS BUTTON */}
 
-            {finalImages.length > 1 && (
-              <div className="image-thumbnails">
-
-                {finalImages.map(
-                  (image, index) => (
+                {finalImages.length > 1 && (
+                  <>
                     <button
                       type="button"
-                      key={image.label}
-                      className={
-                        `thumbnail ${
-                          index === activeImage
-                            ? "active"
-                            : ""
-                        }`
-                      }
-                      onClick={() =>
-                        setActiveImage(index)
-                      }
+                      className="slider-arrow slider-arrow-left"
+                      onClick={showPrev}
+                      aria-label="Previous image"
                     >
-
-                      <img
-                        src={image.url}
-                        alt={
-                          `${image.label} view`
-                        }
-                        onError={(e) => {
-                          e.currentTarget.src =
-                            "/placeholder-bike.jpg";
-                        }}
-                      />
+                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" /></svg>
 
                     </button>
-                  )
+
+
+                    {/* NEXT BUTTON */}
+
+                    <button
+                      type="button"
+                      className="slider-arrow slider-arrow-right"
+                      onClick={showNext}
+                      aria-label="Next image"
+                    >
+
+
+                      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="currentColor"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z" /></svg>
+                    </button>
+
+
+                    {/* COUNTER */}
+
+                    <div className="slider-counter">
+                      {activeImage + 1} /{" "}
+                      {finalImages.length}
+                    </div>
+                  </>
                 )}
 
               </div>
-            )}
-
-          </div>
 
 
-          {/* ================================== */}
-          {/* RIGHT: DETAILS */}
-          {/* ================================== */}
+              {/* = */}
+              {/* IMAGE THUMBNAILS */}
+              {/* = */}
 
-          <div className="bike-modal-details flex_1">
+              {finalImages.length > 1 && (
+                <div className="image-thumbnails">
 
+                  {finalImages.map(
+                    (image, index) => (
+                      <button
+                        type="button"
+                        key={image.label}
+                        className={
+                          `thumbnail ${index === activeImage
+                            ? "active"
+                            : ""
+                          }`
+                        }
+                        onClick={() =>
+                          setActiveImage(index)
+                        }
+                      >
 
-            {/* ================================== */}
-            {/* HEADER */}
-            {/* ================================== */}
+                        <img
+                          src={image.url}
+                          alt={
+                            `${image.label} view`
+                          }
+                          onError={(e) => {
+                            e.currentTarget.src =
+                              "/placeholder-bike.jpg";
+                          }}
+                        />
 
-            <div className="bike-modal-header flex align_center space_between">
+                      </button>
+                    )
+                  )}
 
-              <h2 className="color_green">
-                Bike Request Details
-              </h2>
-
-              <button
-                className="modal-close"
-                onClick={onClose}
-                aria-label="Close"
-              >
-                &times;
-              </button>
-
-            </div>
-
-
-            {/* ================================== */}
-            {/* BIKE NAME + STATUS */}
-            {/* ================================== */}
-
-            <div className="detail-section flex align_center space_between">
-
-              <h3>
-                {bike.bikeName ||
-                  "Untitled Bike"}
-              </h3>
-
-              <span
-                className={`role-badge ${bike.status}`}
-              >
-                {bike.status}
-              </span>
-
-            </div>
-
-
-            {/* ================================== */}
-            {/* REJECTION REASON */}
-            {/* ================================== */}
-
-            {bike.status === "rejected" &&
-              bike.rejectionReason && (
-                <p className="rejection-note color_light font_small">
-                  Rejection reason:{" "}
-                  {bike.rejectionReason}
-                </p>
+                </div>
               )}
 
-
-            {/* ================================== */}
-            {/* BIKE INFORMATION */}
-            {/* ================================== */}
-
-            <div className="detail-section">
-
-              <h4>Bike Information</h4>
-
-              <div className="detail-grid">
-
-                <div>
-                  <span className="detail-label">
-                    Brand
-                  </span>
-
-                  <span className="detail-value">
-                    {bike.brand || "-"}
-                  </span>
-                </div>
+            </div>
 
 
-                <div>
-                  <span className="detail-label">
-                    Model
-                  </span>
+            {/* = */}
+            {/* RIGHT: DETAILS */}
+            {/* = */}
 
-                  <span className="detail-value">
-                    {bike.model || "-"}
-                  </span>
-                </div>
+            <div className="bike-modal-details flex_1">
 
 
-                <div>
-                  <span className="detail-label">
-                    Category
-                  </span>
+              {/* = */}
+              {/* HEADER */}
+              {/* = */}
 
-                  <span className="detail-value">
-                    {bike.category || "-"}
-                  </span>
-                </div>
+              <div className="modal-header flex align_center space_between">
 
+                <h2 className="color_green">
+                  Bike Request Details
+                </h2>
 
-                <div>
-                  <span className="detail-label">
-                    Registration No.
-                  </span>
+                <button
+                  className="modal-close"
+                  onClick={onClose}
+                  aria-label="Close"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="var(--text-dark)"><path d="M256-213.85 213.85-256l224-224-224-224L256-746.15l224 224 224-224L746.15-704l-224 224 224 224L704-213.85l-224-224-224 224Z"></path></svg>
+                </button>
 
-                  <span className="detail-value">
-                    {bike.registrationNumber ||
-                      "-"}
-                  </span>
-                </div>
+              </div>
 
 
-                <div>
-                  <span className="detail-label">
-                    Price / Hour
-                  </span>
+              {/* = */}
+              {/* BIKE NAME + STATUS */}
+              {/* = */}
 
-                  <span className="detail-value">
-                    ₹
-                    {bike.pricePerHour ??
-                      "-"}
-                  </span>
-                </div>
+              <div className="detail-section mt_xsm flex align_center space_between">
 
+                <h3>
+                  {bike.bikeName ||
+                    "Untitled Bike"}
+                </h3>
 
-                <div>
-                  <span className="detail-label">
-                    Price / Day
-                  </span>
+                <span
+                  className={`badge ${bike.status}`}
+                >
+                  {bike.status}
+                </span>
 
-                  <span className="detail-value">
-                    ₹
-                    {bike.pricePerDay ??
-                      "-"}
-                  </span>
-                </div>
+              </div>
 
 
-                <div>
-                  <span className="detail-label">
-                    Security Deposit
-                  </span>
+              {/* = */}
+              {/* REJECTION REASON */}
+              {/* = */}
 
-                  <span className="detail-value">
-                    ₹
-                    {bike.securityDeposit ??
-                      "-"}
-                  </span>
+              {bike.status === "rejected" &&
+                bike.rejectionReason && (
+                  <p className="rejection-note color_light font_small">
+                    Rejection reason:{" "}
+                    {bike.rejectionReason}
+                  </p>
+                )}
+
+
+              {/* = */}
+              {/* BIKE INFORMATION */}
+              {/* = */}
+
+              <div className="detail-section mt_sm border_top pt_sm ">
+
+                <h4 className="weight_medium">Bike Information</h4>
+
+                <div className="detail-grid">
+
+                  <div>
+                    <span className="detail-value font_small color_light">
+                      Brand
+                    </span>
+
+                    <span className="detail-value font_small">
+                      {bike.brand || "-"}
+                    </span>
+                  </div>
+
+
+                  <div>
+                    <span className="detail-value font_small color_light">
+                      Model
+                    </span>
+
+                    <span className="detail-value font_small">
+                      {bike.model || "-"}
+                    </span>
+                  </div>
+
+
+                  <div>
+                    <span className="detail-value font_small color_light">
+                      Category
+                    </span>
+
+                    <span className="detail-value font_small">
+                      {bike.category || "-"}
+                    </span>
+                  </div>
+
+
+                  <div>
+                    <span className="detail-value font_small color_light">
+                      Registration No.
+                    </span>
+
+                    <span className="detail-value font_small">
+                      {bike.registrationNumber ||
+                        "-"}
+                    </span>
+                  </div>
+
+
+                  <div>
+                    <span className="detail-value font_small color_light">
+                      Price / Hour
+                    </span>
+
+                    <span className="detail-value font_small">
+                      ₹
+                      {bike.pricePerHour ??
+                        "-"}
+                    </span>
+                  </div>
+
+
+                  <div>
+                    <span className="detail-value font_small color_light">
+                      Price / Day
+                    </span>
+
+                    <span className="detail-value font_small">
+                      ₹
+                      {bike.pricePerDay ??
+                        "-"}
+                    </span>
+                  </div>
+
+
+                  <div>
+                    <span className="detail-value font_small color_light">
+                      Security Deposit
+                    </span>
+
+                    <span className="detail-value font_small">
+                      ₹
+                      {bike.securityDeposit ??
+                        "-"}
+                    </span>
+                  </div>
+
                 </div>
 
               </div>
 
-            </div>
 
+              {/* = */}
+              {/* LOCATION */}
+              {/* = */}
 
-            {/* ================================== */}
-            {/* LOCATION */}
-            {/* ================================== */}
+                 <div className="detail-section mt_sm border_top pt_sm ">
 
-            <div className="detail-section">
-
-              <h4>Location</h4>
-
-              <p className="detail-value">
-
-                {[
-                  bike.address?.addressLine,
-                  bike.address?.city,
-                  bike.address?.district,
-                  bike.address?.state,
-                  bike.address?.pincode,
-                ]
-                  .filter(Boolean)
-                  .join(", ") || "-"}
-
-              </p>
-
-            </div>
-
-
-            {/* ================================== */}
-            {/* OWNER INFORMATION */}
-            {/* ================================== */}
-
-            <div className="detail-section">
-
-              <h4>Owner Information</h4>
+                <h4 className="weight_medium">Address</h4>
 
               <div className="detail-grid">
 
-                <div>
-                  <span className="detail-label">
-                    Name
+                <div className="span_2">
+                  <span className="detail-value font_small color_light">
+                    Address
                   </span>
 
-                  <span className="detail-value">
-                    {bike.owner?.name ||
-                      "Unknown"}
-                  </span>
-                </div>
-
-
-                <div>
-                  <span className="detail-label">
-                    Email
-                  </span>
-
-                  <span className="detail-value">
-                    {bike.owner?.email ||
-                      "-"}
+                  <span className="detail-value font_small">
+                    {bike.address?.addressLine || "-"}
                   </span>
                 </div>
 
-
-                <div>
-                  <span className="detail-label">
-                    Phone
+                <div className="span_2">
+                  <span className="detail-value font_small color_light">
+                    City
                   </span>
 
-                  <span className="detail-value">
-                    {bike.mobileNumber ||
-                      "-"}
+                  <span className="detail-value font_small">
+                    {bike.address?.city || "-"}
+                  </span>
+                </div>
+
+                <div className="span_2">
+                  <span className="detail-value font_small color_light">
+                    State
+                  </span>
+
+                  <span className="detail-value font_small">
+                    {bike.address?.state || "-"}
+                  </span>
+                </div>
+
+                <div className="span_2">
+                  <span className="detail-value font_small color_light">
+                    Pincode
+                  </span>
+
+                  <span className="detail-value font_small">
+                    {bike.address?.pincode || "-"}
                   </span>
                 </div>
 
               </div>
-
-            </div>
-
-
-            {/* ================================== */}
-            {/* DOCUMENTS */}
-            {/* ================================== */}
-
-            <div className="detail-section">
-
-              <h4>Documents</h4>
+              </div>
 
 
-              {documents.length > 0 ? (
+              {/* = */}
+              {/* OWNER INFORMATION */}
+              {/* = */}
 
-                <div className="document-list">
+              <div className="detail-section mt_sm border_top pt_sm">
 
-                  {documents.map(
-                    (document) => {
+                <h4 className="weight_medium">Owner Information</h4>
 
-                      const documentUrl =
-                        getFileUrl(
-                          document.path
-                        );
+                <div className="detail-grid">
+
+                  <div className="span_2">
+                    <span className="detail-value font_small color_light">
+                      Name
+                    </span>
+
+                    <span className="detail-value font_small">
+                      {bike.owner?.name ||
+                        "Unknown"}
+                    </span>
+                  </div>
+
+       <div className="span_2">
+                    <span className="detail-value font_small color_light">
+                      Phone
+                    </span>
+
+                    <span className="detail-value font_small">
+                      {bike.mobileNumber ||
+                        "-"}
+                    </span>
+                  </div>
+
+                  <div className="span_2">
+                    <span className="detail-value font_small color_light">
+                      Email
+                    </span>
+
+                    <span className="detail-value font_small">
+                      {bike.owner?.email ||
+                        "-"}
+                    </span>
+                  </div>
 
 
-                      return (
-                        <div
-                          className="document-item"
-                          key={document.name}
-                        >
+           
 
-                          <h5>
-                            {document.name}
-                          </h5>
+                </div>
+
+              </div>
 
 
-                          {/* DOCUMENT IMAGE PREVIEW */}
+              {/* = */}
+              {/* DOCUMENTS */}
+              {/* = */}
 
+              <div className="detail-section mt_sm border_top pt_sm">
+
+                <h4 className="weight_medium">Documents</h4>
+
+
+                {documents.length > 0 ? (
+
+                  <div className="document-list">
+
+                    {documents.map(
+                      (document) => {
+
+                        const documentUrl =
+                          getFileUrl(
+                            document.path
+                          );
+
+
+                        return (
+                          <div
+                            className="document-item flex align_center gap_sm space_between mt_xsm"
+                            key={document.name}
+                          >
+
+                            <span className="detail-value font_small color_light">
+                              {document.name}
+                            </span>
+
+
+                            {/* DOCUMENT IMAGE PREVIEW 
                           {isImageDocument(
                             document.path
                           ) && (
@@ -569,97 +600,102 @@ function AdminBikeDetailsModal({
                               }}
                             />
                           )}
+*/}
 
 
-                          {/* OPEN DOCUMENT */}
+                            {/* OPEN DOCUMENT */}
 
-                          <a
-                            href={
-                              documentUrl
-                            }
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            View{" "}
-                            {document.name}
-                          </a>
+                            <a
+                              href={
+                                documentUrl
+                              }
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="color_green border_bottom"
+                            >
+                              View Document
+                            </a>
 
-                        </div>
-                      );
-                    }
-                  )}
+                          </div>
+                        );
+                      }
+                    )}
 
-                </div>
+                  </div>
 
-              ) : (
+                ) : (
 
-                <p className="color_light font_small">
-                  No documents uploaded
-                </p>
+                  <p className="color_light font_small">
+                    No documents uploaded
+                  </p>
 
-              )}
-
-            </div>
-
-
-            {/* ================================== */}
-            {/* DESCRIPTION */}
-            {/* ================================== */}
-
-            <div className="detail-section">
-
-              <h4>
-                Extra Information
-              </h4>
-
-              {bike.description ? (
-
-                <p className="detail-description">
-                  {bike.description}
-                </p>
-
-              ) : (
-
-                <p className="color_light font_small">
-                  No description provided
-                </p>
-
-              )}
-
-            </div>
-
-
-            {/* ================================== */}
-            {/* ADMIN ACTIONS */}
-            {/* ================================== */}
-
-            {bike.status === "pending" && (
-
-              <div className="bike-modal-footer flex align_center gap_sm mt_sm">
-
-                <button
-                  className="button button-approve"
-                  onClick={onApprove}
-                >
-                  Approve
-                </button>
-
-
-                <button
-                  className="button button-reject"
-                  onClick={onReject}
-                >
-                  Reject
-                </button>
+                )}
 
               </div>
 
-            )}
+
+              {/* = */}
+              {/* DESCRIPTION */}
+              {/* = */}
+
+              <div className="detail-section mt_sm border_top pt_sm">
+
+                <h4 className="weight_medium">
+                  Note / Additional Information
+                </h4>
+
+                {bike.description ? (
+
+                  <p className="detail-description mt_xsm color_light font_small">
+                    {bike.description}
+                  </p>
+
+                ) : (
+
+                  <p className="color_light font_small">
+                    No description provided
+                  </p>
+
+                )}
+
+              </div>
+
+
+              {/* = */}
+              {/* ADMIN ACTIONS */}
+              {/* = */}
+
+              {bike.status === "pending" && (
+
+                <div className="flex gap_sm justify_center modal_footer mt_sm">
+
+
+
+                  <button
+                    className="button button-reject btn_danger "
+                    onClick={onReject}
+                  >
+                    Reject
+                  </button>
+
+                  <button
+                    className="button button-approve"
+                    onClick={onApprove}
+                  >
+                    Approve
+                  </button>
+
+
+
+                </div>
+
+              )}
+
+            </div>
 
           </div>
 
         </div>
-
       </div>
     </div>
   );

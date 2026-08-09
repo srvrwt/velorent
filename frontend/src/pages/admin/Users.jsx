@@ -278,8 +278,8 @@ function Users() {
                     <span
                       className={
                         user.role === "admin"
-                          ? "role-badge admin"
-                          : "role-badge user"
+                          ? "badge admin"
+                          : "badge user"
                       }
                     >
                       {user.role}

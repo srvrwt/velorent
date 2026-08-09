@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const bikeSchema = new mongoose.Schema(
   {
-    // ================================
+    // ==========
     // OWNER
-    // ================================
+    // ==========
 
     owner: {
       type: mongoose.Schema.Types.ObjectId,
@@ -19,9 +19,9 @@ const bikeSchema = new mongoose.Schema(
     },
 
 
-    // ================================
+    // ==========
     // BIKE DETAILS
-    // ================================
+    // ==========
 
     bikeName: {
       type: String,
@@ -53,9 +53,9 @@ const bikeSchema = new mongoose.Schema(
     },
 
 
-    // ================================
+    // ==========
     // BIKE IMAGES
-    // ================================
+    // ==========
 
     images: {
       front: {
@@ -80,9 +80,9 @@ const bikeSchema = new mongoose.Schema(
     },
 
 
-    // ================================
+    // ==========
     // REGISTRATION
-    // ================================
+    // ==========
 
     registrationNumber: {
       type: String,
@@ -93,9 +93,9 @@ const bikeSchema = new mongoose.Schema(
     },
 
 
-    // ================================
+    // ==========
     // ADDRESS
-    // ================================
+    // ==========
 
     address: {
       addressLine: {
@@ -109,13 +109,6 @@ const bikeSchema = new mongoose.Schema(
         required: true,
         trim: true,
       },
-
-      district: {
-        type: String,
-        required: true,
-        trim: true,
-      },
-
       state: {
         type: String,
         required: true,
@@ -130,9 +123,9 @@ const bikeSchema = new mongoose.Schema(
     },
 
 
-    // ================================
+    // ==========
     // MOBILE
-    // ================================
+    // ==========
 
     mobileNumber: {
       type: String,
@@ -141,9 +134,9 @@ const bikeSchema = new mongoose.Schema(
     },
 
 
-    // ================================
+    // ==========
     // PRICING
-    // ================================
+    // ==========
 
     pricePerHour: {
       type: Number,
@@ -161,9 +154,9 @@ const bikeSchema = new mongoose.Schema(
     },
 
 
-    // ================================
+    // ==========
     // DOCUMENTS
-    // ================================
+    // ==========
 
     documents: {
       rc: {
@@ -178,9 +171,9 @@ const bikeSchema = new mongoose.Schema(
     },
 
 
-    // ================================
+    // ==========
     // STATUS
-    // ================================
+    // ==========
 
     status: {
       type: String,
