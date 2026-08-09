@@ -14,6 +14,12 @@ export const addBike = async (bikeData) => {
   return response.data;
 };
 
+export async function getApprovedBikes() {
+  const { data } = await api.get("/bikes/approved");
+
+  return data;
+}
+
 export const getMyBikes = async () => {
   const response = await api.get(
     "/bikes/my-bikes"

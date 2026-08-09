@@ -10,6 +10,45 @@ const STEPS = [
   { id: 4, label: "Address & Contact" },
 ];
 
+// Popular bike/scooter brands available in India
+const BIKE_BRANDS = [
+  "Hero MotoCorp",
+  "Honda",
+  "Bajaj",
+  "TVS",
+  "Royal Enfield",
+  "Yamaha",
+  "Suzuki",
+  "KTM",
+  "Jawa",
+  "Yezdi",
+  "Mahindra",
+  "Harley-Davidson",
+  "Triumph",
+  "Ducati",
+  "Kawasaki",
+  "BMW Motorrad",
+  "Aprilia",
+  "Benelli",
+  "CFMoto",
+  "Husqvarna",
+  "Vespa",
+  "Piaggio",
+  "MV Agusta",
+  "Indian Motorcycle",
+  "Moto Guzzi",
+  "UM Motorcycles",
+  "Ather Energy",
+  "Ola Electric",
+  "Bounce",
+  "Revolt Motors",
+  "Okinawa",
+  "Ampere",
+  "Hero Electric",
+  "PURE EV",
+  "Bgauss",
+];
+
 function AddBikeModal({ onClose, onSuccess }) {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -89,7 +128,8 @@ function AddBikeModal({ onClose, onSuccess }) {
 
     if (currentStep === 1) {
       if (!formData.bikeName.trim()) fail("bikeName", "Bike name is required");
-      if (!formData.brand.trim()) fail("brand", "Brand is required");
+      if (!formData.brand.trim() || formData.brand === "Other")
+        fail("brand", "Please select or enter a brand");
       if (!formData.model.trim()) fail("model", "Model is required");
       if (!formData.category) fail("category", "Please select a category");
 
@@ -206,6 +246,10 @@ function AddBikeModal({ onClose, onSuccess }) {
   // small helper so JSX stays clean
   const errClass = (name) => (fieldErrors[name] ? "required" : "");
 
+  // whether the brand select should show "Other" (i.e. brand is empty, custom, or explicitly "Other")
+  const isCustomBrand =
+    formData.brand !== "" && !BIKE_BRANDS.includes(formData.brand);
+
   return (
     <div className="form_container modal-overlay pd_fixed">
       <div className="modal_wrap">
@@ -276,15 +320,36 @@ function AddBikeModal({ onClose, onSuccess }) {
                   className={errClass("bikeName")}
                 />
 
-                <InputField
-                  label="Brand"
-                  type="text"
-                  name="brand"
-                  placeholder="Enter brand"
-                  value={formData.brand}
-                  onChange={handleChange}
-                  className={errClass("brand")}
-                />
+                <div className="input_group">
+                  <label htmlFor="brand">Brand</label>
+                  <select
+                    id="brand"
+                    name="brand"
+                    value={isCustomBrand ? "Other" : formData.brand}
+                    onChange={handleChange}
+                    className={errClass("brand")}
+                  >
+                    <option value="">Select Brand</option>
+                    {BIKE_BRANDS.map((b) => (
+                      <option key={b} value={b}>
+                        {b}
+                      </option>
+                    ))}
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+
+                {(formData.brand === "Other" || isCustomBrand) && (
+                  <InputField
+                    label="Enter Brand Name"
+                    type="text"
+                    name="brand"
+                    placeholder="Type brand name"
+                    value={formData.brand === "Other" ? "" : formData.brand}
+                    onChange={handleChange}
+                    className={errClass("brand")}
+                  />
+                )}
 
                 <InputField
                   label="Model"
@@ -306,10 +371,23 @@ function AddBikeModal({ onClose, onSuccess }) {
                     className={errClass("category")}
                   >
                     <option value="">Select Category</option>
-                    <option value="scooter">Scooter</option>
-                    <option value="motorcycle">Motorcycle</option>
-                    <option value="electric">Electric Bike</option>
-                    <option value="sports">Sports Bike</option>
+                    <option value="Scooter">Scooter</option>
+                    <option value="Motorcycle">Motorcycle</option>
+                    <option value="Sports Bike">Sports Bike</option>
+                    <option value="Cruiser">Cruiser</option>
+                    <option value="Naked Bike">Naked Bike</option>
+                    <option value="Touring Bike">Touring Bike</option>
+                    <option value="Adventure Bike">Adventure Bike</option>
+                    <option value="Dirt Bike">Dirt Bike</option>
+                    <option value="Cafe Racer">Cafe Racer</option>
+                    <option value="Scrambler">Scrambler</option>
+                    <option value="Commuter Bike">Commuter Bike</option>
+                    <option value="Electric Bike">Electric Bike</option>
+                    <option value="Electric Scooter">Electric Scooter</option>
+                    <option value="Off Road">Off-Road Bike</option>
+                    <option value="Dual Sport">Dual Sport</option>
+                    <option value="Superbike">Superbike</option>
+                    <option value="Moped">Moped</option>
                   </select>
                 </div>
 
